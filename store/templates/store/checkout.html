@@ -1,8 +1,8 @@
 {%extends 'store/main.html'%} {%load static%} {%block content%}
 
 <div class="row">
-  <div class="col-lg-6" id="form-wrapper">
-    <div class="box-element">
+  <div class="col-lg-6" id="form-wrapper>
+    <div class="box-element" >
       <form id="form">
         <div id="user-info">
           <div class="form-field">
@@ -79,11 +79,12 @@
       </form>
     </div>
     <br />
-  </div>
     <div class="box-element hidden" id="payment-info">
       <small>Paypal Options</small>
       <button id="make-payment" class="btn btn-success">Make Payment</button>
     </div>
+  </div>
+  
   <div class="col-lg-6">
     <div class="box-element">
       <a class="btn btn-outline-dark" href="{%url 'cart'%}"
@@ -106,20 +107,26 @@
       <h5>Total: {{order.get_cart_total}}</h5>
     </div>
   </div>
+
 </div>
 
 
 <script type="text/javascript">
   const shipping = "{{order.shipping}}";
-  if (shipping == "False" && user != "AnonymousUser") {
-    document.getElementById("form-wrapper").classList.add("hidden");
-    document.getElementById("payment-info").classList.remove("hidden");
-  } else if (shipping == "False") {
-    document.getElementById("shipping-info").innerHTML = "";
-  } else if (user != "AnonymousUser") {
-    document.getElementById("user-info").innerHTML = "";
+  if (shipping== 'False'){
+    document.getElementById('shipping-info').innerHTML = ''
   }
+  if (user != 'AnonymousUser'){
+    document.getElementById('user-info').innerHTML = ''
+  }
+  if (shipping == "False" && user != "AnonymousUser") {
+    document.getElementById("form-button").classList.add("hidden");
+    document.getElementById("payment-info").classList.remove("hidden");
+  } 
+
+
   var form = document.getElementById("form");
+
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     console.log("Form Submitted");
@@ -148,7 +155,7 @@
         UserInfo.email = '{{user.email}}'
         UserInfo.total = '{{order.get_cart_total}}'
     }
-    if (shipping == "False"){
+    if (shipping == "True"){
         ShippingInfo.address = form.address.value
         ShippingInfo.city = form.city.value
         ShippingInfo.state = form.state.value

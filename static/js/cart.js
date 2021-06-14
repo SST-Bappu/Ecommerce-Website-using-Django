@@ -21,7 +21,7 @@ function cartInfo(){
 }
 function updateUserOrder(productId,action){
     console.log('User is authenticated')
-    const url = '/updateItem/'
+    var url = '/updateItem/'
     fetch(url,{
         method:'POST',
         headers:{
