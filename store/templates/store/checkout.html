@@ -1,8 +1,8 @@
 {%extends 'store/main.html'%} {%load static%} {%block content%}
 
 <div class="row">
-  <div class="col-lg-6" id="form-wrapper>
-    <div class="box-element" >
+  <div class="col-lg-6" >
+    <div class="box-element" id="form-wrapper">
       <form id="form">
         <div id="user-info">
           <div class="form-field">
@@ -113,6 +113,8 @@
 
 <script type="text/javascript">
   const shipping = "{{order.shipping}}";
+
+
   if (shipping== 'False'){
     document.getElementById('shipping-info').innerHTML = ''
   }
@@ -130,32 +132,35 @@
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     console.log("Form Submitted");
-    document.getElementById("form-button").classList.add("hidden");
+    document.getElementById("form-wrapper").classList.add("hidden");
     document.getElementById("payment-info").classList.remove("hidden");
   });
   document.getElementById("make-payment").addEventListener("click", function (e) {
         submitformData();
       });
+      
+  var total = '{{order.get_cart_total}}'
+
   function submitformData() {
     console.log("Form data submitted");
     var UserInfo = {
         'name':null,
         'email':null,
-        'total':null
+        'total':total,
     }
     var ShippingInfo = {
         'address':null,
         'city':null,
         'state':null,
         'zipcode':null,
-        'country':null
+        'country':null,
     }
-    if (user != 'AnonymousUser'){
-        UserInfo.name = '{{user}}'
-        UserInfo.email = '{{user.email}}'
-        UserInfo.total = '{{order.get_cart_total}}'
+ 
+    if (user == 'AnonymousUser'){
+        UserInfo.name = form.name.value
+        UserInfo.email = form.email.value
     }
-    if (shipping == "True"){
+    if (shipping != "False"){
         ShippingInfo.address = form.address.value
         ShippingInfo.city = form.city.value
         ShippingInfo.state = form.state.value
