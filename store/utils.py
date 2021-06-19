@@ -31,3 +31,26 @@ def cookieCart(request):
             pass
     cartItems = order['get_cart_items']
     return {'order':order,'items':items,'cartItems':cartItems}
+
+
+def GuestOrder(request,data):
+    cookieData = cookieCart(request)
+    name = data['UserInfo']['name']
+    email = data['UserInfo']['email']
+    customer,created = Customer.objects.get_or_create(email = email)
+    customer.name = name
+    customer.save()
+
+    order = Order.objects.create(
+        customer = customer,
+        complete = False,
+    )
+    items = cookieData['items']
+    for item in items:
+        product = Product.objects.get(id = item['product']['id'])
+        OrderItem.objects.create(
+            product = product,
+            order = order,
+            quantity = item['quantity'],
+        )
+    return order,customer
