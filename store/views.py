@@ -100,3 +100,31 @@ def processOrder(request):
 
 
     return JsonResponse("Payment has been completed",safe=False)
+
+
+
+#Login Process
+def UserLogin(request):
+    return render(request,'store/loginForm.html')
+
+
+def OrderRecords(request):
+    if request.user.is_authenticated:
+        Customer = request.user.customer
+        orders = Customer.order_set.all()
+        orderRecords = []
+        for order in orders:
+            items = order.orderitem_set.all()
+            cart_items = order.get_cart_items
+            cart_total = order.get_cart_total
+            records = {
+                'date':order.date_ordered,
+                'items':items,
+                'cart_items':cart_items,
+                'cart_total':cart_total,
+                'items':items
+            }
+            orderRecords.append(records)
+        context = {'records':orderRecords}
+    
+    return render(request,'store/orderRecords.html',context)
