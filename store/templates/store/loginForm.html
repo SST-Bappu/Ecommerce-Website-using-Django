@@ -10,8 +10,17 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <title>Login</title>
+  <style>
+    #messages{
+        background-color: #56baed;
+        color: #fff;
+        padding: 10px;
+        margin-top: 10px;
+      }
+  </style>
 </head>
 <body>
+<a class = "btn btn-warning" href="#">Store</a>
     <div class="wrapper fadeInDown">
         <div id="formContent">
           <!-- Tabs Titles -->
@@ -27,10 +36,17 @@
             <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
             <input type="submit" class="fadeIn fourth" value="Log In">
           </form>
-      
+          
           <!-- Remind Passowrd -->
           <div id="formFooter">
             <a class="underlineHover" href="#">Forgot Password?</a>
+            {%if messages %}
+              {% for message in messages %}
+                <p id="messages">{{message}}</p>
+              {%endfor%}
+            {%else%}
+              <p>"Don't have an account?" <a class="underlineHover" href="{% url 'userRegistration' %}">SignUp</a></p>
+            {%endif%}
           </div>
       
         </div>

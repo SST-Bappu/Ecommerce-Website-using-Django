@@ -1,0 +1,106 @@
+{% comment %} {%extends 'store/main.html' %} {% endcomment %}
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'css/loginFormDesign.css'%}">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>Registration</title>
+
+    <style>
+      .input-group-text {
+        background: #56baed !important;
+        color: white !important;
+        border: 0 !important;
+        border-radius: 0.25rem 0 0 0.25rem !important;
+      }
+      .input_user,
+      .input_pass:focus {
+        box-shadow: none !important;
+        outline: 0px !important;
+      }
+      #messages{
+        background-color: #FF6347;
+        color: #fff;
+        padding: 10px;
+        margin-top: 10px;
+      }
+
+    </style>
+</head>
+<body>
+    <a class = "btn btn-warning" href="#">Store</a>
+    {% comment %} {%block content%} {% endcomment %}
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+          <!-- Tabs Titles -->
+      
+          <!-- Icon -->
+          <div class="fadeIn first">
+            <img src="{%static 'images/login.png'%}" style="width:30%; height:30%; object-fit: contain;" id="icon" alt="User Icon" />
+          </div>
+      
+          <!-- Login Form -->
+          <form method="POST" action="">
+            {%csrf_token%}
+            <div class="input-group mb-3 fadeIn second">
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                </div>
+                {{form.username}}
+            </div>
+            <div class="input-group mb-3 fadeIn third">
+                <div class="input-group-append ">
+                    <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
+                </div>
+                {{form.email}}
+            </div>
+            <div class="input-group mb-2 fadeIn fourth" id = "login">
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="fas fa-key"></i></span>
+                </div>
+                {{form.password1}}
+            </div>
+            <div class="input-group mb-2 fadeIn fourth" id = "login">
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="fas fa-key"></i></span>
+                </div>
+                {{form.password2}}
+            </div>
+
+               <div class="d-flex justify-content-center mt-3 login_container">
+                 <input class="btn login_btn" type="submit" value="Register Account">
+               </div>
+        </form>
+          <!-- Remind Passowrd -->
+          <div id="formFooter">
+           {%for message in messages%}
+				    <p id="messages">{{message}}</p>
+				  {%endfor%}
+            <p>Already have an account?  <a class = "underlineHover" href="{%url 'userLogin'%}">Login Here</a></p>
+          </div>
+      
+        </div>
+      </div>
+      <script>
+          var form_fields = document.getElementsByTagName('input')
+          form_fields[1].placeholder='Username..';
+          form_fields[2].placeholder='Email..';
+          form_fields[3].placeholder='Enter password...';
+          form_fields[4].placeholder='Re-enter Password...';
+
+
+          for (var field in form_fields){	
+            form_fields[field].className += ' form-control'
+          }
+	    </script>
+      </script>
+  </body>
+</html>
+      {% comment %} {%endblock%} {% endcomment %}

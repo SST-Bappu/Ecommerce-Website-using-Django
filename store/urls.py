@@ -8,5 +8,6 @@ urlpatterns=[
     path('updateItem/',views.updateItem, name='updateItem'),
     path('processOrder/',views.processOrder,name='processOrder'),
     path('userLogin/',views.UserLogin,name='userLogin'),
+    path('userRegistration/',views.UserRegistration,name='userRegistration'),
     path('orderRecords/',views.OrderRecords,name='orderRecords'),
 ]

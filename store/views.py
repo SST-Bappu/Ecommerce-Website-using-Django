@@ -1,8 +1,12 @@
-from django.shortcuts import render
+from django.core.checks import messages
+from django.shortcuts import redirect, render
 from django.http import JsonResponse
 import json
+from django.contrib import messages
+
 from .models import *
 from .utils import cookieCart, GuestOrder
+from .form import CreateUserForm
 import datetime
 # Create your views here.
 def store(request):
@@ -107,7 +111,31 @@ def processOrder(request):
 def UserLogin(request):
     return render(request,'store/loginForm.html')
 
-
+def UserRegistration(request):
+    form = CreateUserForm()
+    context = {'form':form}
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            username = form.cleaned_data.get('username')
+            email = form.cleaned_data.get('email')
+            Customer.objects.create(
+                user = user,
+                name = username,
+                email = email,
+                )
+            messages.success(request,'User account has been created for'+username)
+            return redirect('userLogin')
+        else:
+            pass1 = form.cleaned_data.get('password1')
+            pass2 = form.cleaned_data.get('password2')
+            if pass1!=pass2:
+                messages.error(request,"Password didn't match")
+            else:
+                messages.error(request,"Fill all the field correctly")
+            return redirect('userRegistration')
+    return render(request,'store/userRegistration.html',context)
 def OrderRecords(request):
     if request.user.is_authenticated:
         Customer = request.user.customer
