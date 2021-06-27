@@ -9,8 +9,15 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <title>Login</title>
   <style>
+  .input-group-text {
+        background: #56baed !important;
+        color: white !important;
+        border: 0 !important;
+        border-radius: 0.25rem 0 0 0.25rem !important;
+      }
     #messages{
         background-color: #56baed;
         color: #fff;
@@ -37,6 +44,20 @@
             <input type="password" id="login" class="fadeIn third" name="password" placeholder="password">
             <input type="submit" class="fadeIn fourth" value="Log In">
           </form>
+          <div class="input-group mb-2 fadeIn fourth">
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="fab fa-facebook-f fa-fw"></i></span>
+                </div>
+                <a href ="{% url 'social:begin' 'facebook' %}"><t/>Login with Facebook</a>
+            </div>
+            <div class="input-group mb-2 fadeIn fourth">
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="fab fa-google"></i></span>
+                </div>
+                <a href ="#"><t/>Login with Google</a>
+            </div>
+           
+
           
           <!-- Remind Passowrd -->
           <div id="formFooter">

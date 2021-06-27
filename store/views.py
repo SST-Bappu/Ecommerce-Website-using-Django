@@ -13,7 +13,8 @@ from .form import CreateUserForm
 import datetime
 # Create your views here.
 
-
+def home(request):
+    store(request)
 def store(request):
     if request.user.is_authenticated:
         customer = request.user.customer
