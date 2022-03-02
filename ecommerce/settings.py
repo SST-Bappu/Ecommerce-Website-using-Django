@@ -118,8 +118,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 #Facebook Authentication
-SOCIAL_AUTH_FACEBOOK_KEY = '224142956217457'
-SOCIAL_AUTH_FACEBOOK_SECRET = 'db38eae4d1f610815c3551ad078eabb5'
+SOCIAL_AUTH_FACEBOOK_KEY = 
+SOCIAL_AUTH_FACEBOOK_SECRET = 
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
